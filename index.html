@@ -33,7 +33,7 @@ nav.top a:hover{color:var(--ink);background:var(--card)}
 .btn.ghost{background:var(--card);color:var(--ink);border:1px solid var(--line);box-shadow:none}
 .btn.ghost:hover{border-color:var(--blue)}
 
-/* hero: simple box now, the knight hero comes later */
+/* old simple hero box (kept for reference, unused) */
 .hero{padding-block:44px 20px}
 .hero-box{position:relative;overflow:hidden;background:radial-gradient(700px 300px at 85% 0%,rgba(255,106,43,.18),transparent 70%),linear-gradient(160deg,#1d2027,#15171b);border:1px solid var(--line);border-radius:24px;padding:clamp(26px,5vw,56px)}
 .tag{display:inline-block;border:1px solid #5a3a26;color:var(--ember-l);background:rgba(255,106,43,.08);padding:5px 12px;border-radius:8px;font-size:13px;font-weight:600;margin-bottom:16px}
@@ -108,6 +108,107 @@ footer a.pp{text-decoration:underline;color:var(--ink);font-weight:600}
 @media(max-width:760px){.wrap{padding-inline:16px}.hero{padding-block:22px 8px}.hero p{font-size:16.5px}section{padding-block:40px}.logo img{height:28px}.rows{grid-template-columns:1fr}.grit{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
 </style>
+<style id="kh-css">
+section.kh-hero{padding:0}
+.kh-hero{--k-bg:#0b0907;--k-ink:#f3e7d3;--k-muted:#b9a68c;--k-ember:#ff7a1f;--k-ember2:#ffb547;--k-gold:#c8973f;--k-steel:#9aa3ab;--k-navy:#18233a;color:var(--k-ink)}
+
+.kh-hero{position:relative;width:100%;}
+.kh-stage{position:relative;contain:paint;width:100%;height:min(calc(100vh - 64px),56.25vw);min-height:520px;overflow:hidden;background:#070504;
+  user-select:none;-webkit-user-select:none}
+.flash{position:absolute;inset:0;pointer-events:none;opacity:0;visibility:hidden;
+  background:radial-gradient(60% 50% at 52% 40%,rgba(255,236,200,.75),rgba(255,160,60,.18) 50%,transparent 75%)}
+.vignette{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 90% at 55% 45%,transparent 55%,rgba(0,0,0,.55) 100%),
+             linear-gradient(90deg,rgba(0,0,0,.28),transparent 30%)}
+/* vùng cầm dao */
+#view,#bgv{position:absolute;left:0;top:0;width:100%;height:100%;display:block}
+.grab{position:absolute;touch-action:none;cursor:grab;z-index:3}
+.grab:active{cursor:grabbing}
+
+/* ===== khung họa tiết ===== */
+.kh-stage{--c:118px;--cs:150px}
+
+/* ===== chữ ===== */
+.kh-copy{position:absolute;left:clamp(60px,6vw,110px);top:clamp(70px,9vh,110px);z-index:5;max-width:min(480px,36vw);pointer-events:none}
+.eyebrow{font:600 12px/1 Figtree;letter-spacing:.28em;text-transform:uppercase;color:var(--k-ember2);display:flex;align-items:center;gap:10px}
+.eb-long{display:contents}
+.eyebrow svg{width:14px;height:14px}
+.kh-hero h1{font-family:Grenze,serif;font-weight:700;font-size:clamp(40px,4.6vw,76px);line-height:.95;margin:.28em 0 .3em;
+  color:#f6e9d2;text-shadow:0 2px 14px rgba(0,0,0,.95),0 0 18px rgba(255,122,31,.35),0 3px 0 rgba(0,0,0,.6)}
+.kh-hero h1 em{font-style:normal;color:var(--k-ember2)}
+.kh-sub{font-size:clamp(15px,1.15vw,18px);line-height:1.5;color:#d8c7ad;text-shadow:0 1px 6px #000;max-width:30ch}
+
+/* ===== gợi ý kéo ===== */
+.hint{position:absolute;z-index:5;pointer-events:none;display:flex;align-items:center;gap:8px;
+  font:600 13px/1 Figtree;color:#fff3df;background:rgba(14,10,7,.78);border:1px solid rgba(200,151,63,.6);
+  padding:9px 13px 9px 10px;border-radius:999px;box-shadow:0 0 0 4px rgba(255,122,31,.12),0 6px 18px rgba(0,0,0,.6);white-space:nowrap}
+.hint svg{width:18px;height:22px}
+
+/* ===== thanh độ sắc ===== */
+.meter{position:absolute;left:50%;bottom:58px;transform:translateX(-50%);width:min(560px,46vw);z-index:5;pointer-events:none}
+.meter .kh-row{display:flex;justify-content:space-between;align-items:baseline;margin:0 4px 7px 70px;font:600 12px/1 Figtree;letter-spacing:.18em;text-transform:uppercase;color:var(--k-muted)}
+.meter .state{color:var(--k-ember2);letter-spacing:.12em}
+.sword{position:relative;height:34px;display:flex;align-items:center}
+.sword .hilt{width:70px;height:34px;flex:none}
+.track{position:relative;flex:1;height:16px;margin-left:-2px;
+  clip-path:polygon(0 0,94% 0,100% 50%,94% 100%,0 100%);background:linear-gradient(#2a2622,#151210);
+  box-shadow:inset 0 0 0 1px rgba(154,163,171,.35)}
+.track::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - 1px),rgba(0,0,0,.6) calc(25% - 1px) 25%)}
+.fill{position:absolute;left:0;top:0;bottom:0;width:0%;
+  background:linear-gradient(90deg,#7a2a0c,#ff7a1f 35%,#ffc56b 70%,#f4f7fa);box-shadow:0 0 12px rgba(255,140,40,.8)}
+.fill::after{content:"";position:absolute;left:0;right:0;top:2px;height:3px;background:rgba(255,255,255,.55);filter:blur(1px)}
+.state{display:inline-block;transform-origin:right center}
+.meter.done .track{box-shadow:inset 0 0 0 1px #ffd89a,0 0 18px rgba(255,200,120,.9)}
+
+/* ===== phần thưởng ===== */
+.reward{position:absolute;left:clamp(48px,5vw,90px);bottom:46px;z-index:6;text-align:left;pointer-events:none;opacity:0;visibility:hidden;
+  max-width:380px}
+.reward .big{font-family:Grenze,serif;font-weight:700;font-size:clamp(32px,2.8vw,46px);line-height:1;color:#fff4e0;
+  text-shadow:0 2px 14px rgba(0,0,0,.95),0 0 18px rgba(255,190,90,.7),0 0 40px rgba(255,122,31,.45)}
+.reward p{margin:.45em 0 .95em;color:#ecdcc2;font-size:15px;line-height:1.45;text-shadow:0 1px 3px #000,0 2px 12px rgba(0,0,0,.95)}
+.reward .btns{display:flex;gap:10px;flex-wrap:wrap}
+.kh-btn{pointer-events:auto;display:inline-flex;align-items:center;gap:8px;font:700 14px/1 Figtree;text-decoration:none;cursor:pointer;
+  padding:12px 18px;border-radius:4px;border:1px solid #ffcf86;color:#1b0f05;background:linear-gradient(#ffb547,#ff7a1f);
+  box-shadow:0 0 0 3px rgba(255,122,31,.25),0 8px 24px rgba(0,0,0,.6)}
+.kh-btn.kh-ghost{background:rgba(12,9,7,.75);color:#f3e7d3;border-color:rgba(200,151,63,.6);box-shadow:none}
+.kh-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+.sound{position:absolute;right:58px;top:54px;z-index:6;width:42px;height:42px;border-radius:50%;cursor:pointer;
+  border:1px solid rgba(200,151,63,.7);background:radial-gradient(#2b2520,#0e0b09);color:#f3d9a8;display:grid;place-items:center;
+  box-shadow:0 4px 12px rgba(0,0,0,.7)}
+.sound svg{width:20px;height:20px}
+.sound .off{display:none}.sound.muted .on{display:none}.sound.muted .off{display:block}
+
+@media (max-width:1320px) and (min-width:761px){ .reward{bottom:128px} }
+
+/* ===== điện thoại: cắt cận vào đá và dao ===== */
+@media (max-width:760px){
+  .kh-hero{display:flex;flex-direction:column;background:radial-gradient(120% 80% at 20% 0%,#2a1408,#0b0907 60%)}
+  .kh-copy{position:relative;left:auto;top:auto;max-width:none;padding:34px 22px 18px}
+  .kh-hero h1{font-size:44px}
+  .kh-sub{max-width:none;font-size:15px}
+  .eb-x{display:none}
+  .kh-stage{height:auto;aspect-ratio:1/1.08;min-height:0;--c:70px;--cs:92px}
+  .meter{width:calc(100% - 64px);bottom:38px}
+  .meter .kh-row{margin-left:56px;font-size:11px}
+  .sword .hilt{width:56px}
+  .sound{right:34px;top:34px;width:38px;height:38px}
+  .reward{left:16px;bottom:16px;max-width:calc(100% - 32px)}
+  .meter{transition:opacity .4s}
+  .meter.done{opacity:0}
+  .reward .btns{gap:8px}
+  .reward .big{font-size:30px}
+  .reward p{font-size:13px;margin:.35em 0 .75em}
+  .kh-btn{padding:10px 13px;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){ .firelight{opacity:.5} }
+
+.kh-skip{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font:600 14px/1 Figtree;color:var(--k-ember2);pointer-events:auto;text-decoration:underline;text-underline-offset:3px}
+.kh-hero h1{font-weight:700}
+.kh-facts{display:flex;gap:10px;flex-wrap:wrap;padding-block:18px 4px}
+@media (max-width:760px){ .kh-skip{margin-top:10px;font-size:13px} }
+
+</style>
 </head>
 <body>
 
@@ -122,23 +223,63 @@ footer a.pp{text-decoration:underline;color:var(--ink);font-weight:600}
 </div></header>
 
 <main>
-<!-- HERO (simple for now; the knight hero comes later) -->
-<section class="hero"><div class="wrap">
-  <div class="hero-box">
-    <span class="tag">Work Sharp, Australian store</span>
-    <h1>Keep every blade sharp</h1>
-    <p>Every Work Sharp sharpener sold in Australia, from a pocket-size pull-through to a metal benchtop system, plus every spare belt and plate sorted by the machine it fits.</p>
-    <div class="cta">
-      <a class="btn" href="#sharpeners">Find your sharpener</a>
-      <a class="btn ghost" href="#parts">Belts and parts</a>
-    </div>
-    <div class="facts">
-      <span><b>3-year</b> warranty on sharpeners</span>
-      <span><b>30-day</b> money-back (not on belts, plates or strops)</span>
-      <span><b>Free delivery</b> over $99</span>
-    </div>
+<!-- HERO: hiệp sĩ mài dao (khách kéo dao để mài) -->
+<section class="kh-hero" id="hero">
+  <div class="kh-copy">
+    <div class="eyebrow"><span class="eb-long"><svg viewBox="-10 -10 20 20"><path d="M0-10L2.2-2.2 10 0 2.2 2.2 0 10-2.2 2.2-10 0-2.2-2.2Z" fill="#ff7a1f"/></svg>Knife.Picks<span class="eb-x"> · The whetstone trial</span></span></div>
+    <h1>Sharpen like<br>a <em>knight.</em></h1>
+    <p class="kh-sub">Grab the knife and drag it up and down the stone. Keep going until the edge meter is full.</p>
+    <a class="kh-skip" href="#sharpeners">Skip to the sharpeners ↓</a>
   </div>
-</div></section>
+
+  <div class="kh-stage" id="stage">
+    <canvas id="bgv" aria-hidden="true"></canvas>
+    <canvas id="view" aria-label="Armoured gauntlets holding a chef's knife on a whetstone" role="img"></canvas>
+    <div class="grab" id="grab" aria-label="Drag the knife up and down to sharpen it" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+    <div class="vignette"></div>
+    <div class="flash" id="flash"></div>
+
+    <div class="hint" id="hint">
+      <svg viewBox="0 0 18 22" fill="none" stroke="#ffb547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v18M4 6l5-4 5 4M4 16l5 4 5-4"/></svg>
+      Drag the knife
+    </div>
+
+    <div class="meter" id="meter">
+      <div class="kh-row"><span>Edge</span><span class="state" id="state">Dull</span></div>
+      <div class="sword">
+        <svg class="hilt" viewBox="0 0 70 34"><defs><linearGradient id="gH" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3d59a"/><stop offset=".5" stop-color="#c8973f"/><stop offset="1" stop-color="#6d4a17"/></linearGradient></defs>
+          <circle cx="8" cy="17" r="6.5" fill="url(#gH)" stroke="#2a1a08" stroke-width="1.2"/>
+          <path d="M8 17l0 0" /><path d="M8 13.5l1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1z" fill="#ff7a1f"/>
+          <rect x="14" y="13" width="32" height="8" rx="3" fill="#3a2414" stroke="#160c05"/>
+          <path d="M17 13v8M22 13v8M27 13v8M32 13v8M37 13v8M42 13v8" stroke="#c8973f" stroke-width="1" opacity=".7"/>
+          <path d="M46 4c4 2 6 6 7 9h17v8H53c-1 3-3 7-7 9 1-4 1-9 0-13 1-4 1-9 0-13z" fill="url(#gH)" stroke="#2a1a08" stroke-width="1.2"/>
+        </svg>
+        <div class="track"><div class="fill" id="fill"></div></div>
+      </div>
+    </div>
+
+    <div class="reward" id="reward">
+      <div class="big">Razor sharp.</div>
+      <p>Nice work. Now find a sharpener that gets your knives like this at home, without the gauntlets.</p>
+      <div class="btns">
+        <a class="kh-btn" href="#sharpeners">See the sharpeners
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 1v11M2 7l5 5 5-5"/></svg></a>
+        <button class="kh-btn kh-ghost" id="again" type="button">Sharpen again</button>
+      </div>
+    </div>
+
+    <button class="sound" id="sound" type="button" aria-label="Sound on or off">
+      <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9a4 4 0 010 6M18.5 6.5a7.5 7.5 0 010 11"/></svg>
+      <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6"/></svg>
+    </button>
+  </div>
+</section>
+
+<div class="wrap kh-facts facts">
+  <span><b>3-year</b> warranty on sharpeners</span>
+  <span><b>30-day</b> money-back (not on belts, plates or strops)</span>
+  <span><b>Free delivery</b> over $99</span>
+</div>
 
 <section id="sharpeners"><div class="wrap">
   <div class="head">
@@ -220,7 +361,7 @@ const STAGES = [
   { id:"gear",    title:"Kits, cases and hardware", sub:"" }
 ];
 // Paste the TermsFeed link here when it is ready
-const PRIVACY_URL = "";
+const PRIVACY_URL = "privacy.html";
 /* ===================== END OF SETTINGS ===================== */
 
 const M = window.KP_MACHINES, PARTS = window.KP_PARTS;
@@ -278,9 +419,275 @@ document.getElementById("y").textContent=new Date().getFullYear();
 <script src="assets/js/gsap.min.js"></script>
 <script>
 if(window.gsap && !matchMedia("(prefers-reduced-motion: reduce)").matches){
-  gsap.from(".hero-box > *",{y:18,autoAlpha:0,duration:.6,ease:"power3.out",stagger:.08});
   gsap.from(".logo img",{autoAlpha:0,y:-6,duration:.5,ease:"power2.out"});
 }
+</script>
+<script>
+/* ===== HERO: knight sharpening (canvas) ===== */
+const IMG = { nen: "assets/img/hero/nen.webp", tay: "assets/img/hero/tay.webp", blade: "assets/img/hero/blade.webp" };
+const META = {"A": [140, -95], "B": [250, -40], "off": [293, -245.99999999999997], "size": [1176, 923], "bbox": [293, 0, 1469, 923], "edge1": [140.0, 652.1], "edge2": [436.7, 754.8], "tip": [15.7, 567.2]};
+
+(() => {
+  const $ = id => document.getElementById(id);
+  const stage = $('stage'), view = $('view'), vx = view.getContext('2d'), bgv = $('bgv'), grab = $('grab');
+  const MOBILE = matchMedia('(max-width:760px)').matches || navigator.maxTouchPoints > 0;
+  const [LW, LH] = META.size;
+  const ax = META.B[0]-META.A[0], ay = META.B[1]-META.A[1];
+  const posAt = t => [META.off[0]+META.A[0]+ax*t, META.off[1]+META.A[1]+ay*t];
+  let t = 0.5, scale = 1, OX = 0, OY = 0, dpr = 1, k = 1;
+
+  // ---------- ảnh: tải một lần, thu nhỏ sẵn đúng cỡ màn hình ----------
+  const load = src => new Promise(r => { const im = new Image(); im.onload = () => r(im); im.src = src; });
+  let I = null, bgC, tayC, bladeC;
+  const mk = (w, h) => { const c = document.createElement('canvas'); c.width = Math.max(1, Math.ceil(w)); c.height = Math.max(1, Math.ceil(h)); return c; };
+  const fireSpr = (() => { const c = mk(128,128), x = c.getContext('2d'), g = x.createRadialGradient(64,64,0,64,64,64);
+    g.addColorStop(0,'rgba(255,140,40,.34)'); g.addColorStop(.45,'rgba(255,90,20,.12)'); g.addColorStop(.7,'rgba(200,50,10,.04)'); g.addColorStop(1,'rgba(0,0,0,0)');
+    x.fillStyle = g; x.fillRect(0,0,128,128); return c; })();
+
+  // ---------- co giãn khung, điện thoại cắt cận ----------
+  function layout(){
+    const W = stage.clientWidth, H = stage.clientHeight;
+    scale = Math.max(W/1792, H/1008);
+    const fx0 = W < 760 ? 960 : 905, fy0 = 470;
+    OX = Math.min(0, Math.max(W-1792*scale, W/2 - fx0*scale));
+    OY = Math.min(0, Math.max(H-1008*scale, H/2 - fy0*scale));
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    k = scale*dpr;
+    view.width = bgv.width = Math.round(W*dpr); view.height = bgv.height = Math.round(H*dpr);
+    Object.assign(grab.style, {left: OX+420*scale+'px', top: OY+130*scale+'px', width: 1020*scale+'px', height: 470*scale+'px'});
+    if (I){
+      const b = bgv.getContext('2d'); b.imageSmoothingQuality = 'high'; b.drawImage(I.nen, OX*dpr, OY*dpr, 1792*k, 1008*k); bgC = true;
+      tayC = mk(LW*k, LH*k); const tc = tayC.getContext('2d'); tc.imageSmoothingQuality = 'high'; tc.drawImage(I.tay, 0, 0, tayC.width, tayC.height);
+      bladeC = mk(LW*k, LH*k); const bc = bladeC.getContext('2d'); bc.imageSmoothingQuality = 'high'; bc.drawImage(I.blade, 0, 0, bladeC.width, bladeC.height);
+    }
+    placeHint();
+  }
+  function setT(v){ t = Math.max(0, Math.min(1, v)); }
+  let rz; window.addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(layout, 120); });
+
+  // ---------- âm thanh (tự tạo) ----------
+  let ac = null, noiseGain, bp, muted = false;
+  function initAudio(){
+    if (ac) { if (ac.state === 'suspended') ac.resume(); return; }
+    try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) { return; }
+    const len = ac.sampleRate * 2, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0);
+    for (let i=0;i<len;i++) d[i] = (Math.random()*2-1) * (0.6 + 0.4*Math.random());
+    const src = ac.createBufferSource(); src.buffer = buf; src.loop = true;
+    bp = ac.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 2200; bp.Q.value = 1.1;
+    const hp = ac.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 900;
+    noiseGain = ac.createGain(); noiseGain.gain.value = 0;
+    src.connect(bp).connect(hp).connect(noiseGain).connect(ac.destination); src.start();
+  }
+  function ting(){
+    if (!ac || muted) return;
+    const now = ac.currentTime;
+    [[1568,.22],[2349,.14],[3136,.09],[4699,.05]].forEach(([f,g],i)=>{
+      const o = ac.createOscillator(), gn = ac.createGain();
+      o.type = 'sine'; o.frequency.value = f; gn.gain.setValueAtTime(0, now+i*.02);
+      gn.gain.linearRampToValueAtTime(g, now+i*.02+.01); gn.gain.exponentialRampToValueAtTime(.0001, now+2.2);
+      o.connect(gn).connect(ac.destination); o.start(now+i*.02); o.stop(now+2.4);
+    });
+  }
+  $('sound').addEventListener('click', () => {
+    muted = !muted; $('sound').classList.toggle('muted', muted);
+    if (!muted) initAudio(); else if (noiseGain) noiseGain.gain.value = 0;
+  });
+
+  // ---------- hạt: tia lửa, bụi thép, tàn lửa ----------
+  const parts = [];
+  const embers = Array.from({length:55}, () => newEmber(true));
+  function newEmber(init){ return {x:70+Math.random()*190, y: init? 20+Math.random()*290 : 270+Math.random()*30, vx:(Math.random()-.3)*.7, vy:-(.6+Math.random()*1.3), life: 1, a:.5+Math.random()*.5, s:1+Math.random()*2}; }
+  // ngọn lửa: hạt sáng bốc lên từ lò
+  const FIRE = {x0:60, x1:260, y:305};
+  const flames = [];
+  const FLAME_N = MOBILE ? 70 : 130;
+  const SPR = [[255,238,170],[255,150,30],[210,60,10]].map(([r,g,b]) => {
+    const c = document.createElement('canvas'); c.width = 32; c.height = 64; const x = c.getContext('2d');
+    x.translate(16,32); x.scale(1, 2); const gr = x.createRadialGradient(0,0,0,0,0,16);
+    gr.addColorStop(0, `rgba(${r},${g},${b},1)`); gr.addColorStop(.5, `rgba(${r},${g},${b},.4)`); gr.addColorStop(1, `rgba(${r},${g},${b},0)`);
+    x.fillStyle = gr; x.fillRect(-16,-16,32,32); return c;
+  });
+  function newFlame(){ const x = FIRE.x0 + Math.random()*(FIRE.x1-FIRE.x0), mid = 1-Math.abs((x-(FIRE.x0+FIRE.x1)/2)/((FIRE.x1-FIRE.x0)/2));
+    return {x, y: FIRE.y + Math.random()*12, vx:(Math.random()-.5)*.5, vy:-(1.8+Math.random()*2.6)*(0.6+mid*0.8), r: 12+Math.random()*18*(0.5+mid), life:1, decay:.014+Math.random()*.016, ph:Math.random()*6}; }
+  function edgePoint(){
+    const k = Math.random(), [rx,ry] = posAt(t);
+    const p = [META.edge1[0]+(META.edge2[0]-META.edge1[0])*k, META.edge1[1]+(META.edge2[1]-META.edge1[1])*k];
+    return [rx+p[0], ry+p[1]+14];
+  }
+  function emit(n, dir, power=1){
+    for (let i=0;i<n;i++){
+      const [x,y] = edgePoint(), spark = Math.random() < .55;
+      const ang = Math.atan2(-ay*dir, -ax*dir) + (Math.random()-.5)*1.6;
+      const sp = (spark? 6+Math.random()*10 : 1.5+Math.random()*3.5) * power;
+      parts.push({x, y, vx:Math.cos(ang)*sp, vy:Math.sin(ang)*sp+(Math.random()-.5)*2, life:1, decay: spark? .022+Math.random()*.02 : .012+Math.random()*.015, spark});
+    }
+  }
+  const glint = {p:0, a:0}, fire = {a:.8};
+  let running = true, visible = true;
+  function frame(){
+    if (!running) return;
+    if (pending){ const d = pending; pending = 0; move(d); }
+    if (!bgC){ requestAnimationFrame(frame); return; }
+    const ctx = vx;
+    ctx.setTransform(1,0,0,1,0,0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
+    ctx.clearRect(0, 0, view.width, view.height);
+    ctx.globalAlpha = fire.a;
+    ctx.drawImage(fireSpr, OX*dpr - 420*k, OY*dpr - 380*k, 1180*k, 1120*k);
+    const [rx, ry] = posAt(t), X = OX*dpr + rx*k, Y = OY*dpr + ry*k;
+    ctx.globalAlpha = 1; ctx.drawImage(tayC, X, Y);
+    if (sharp > 0){ ctx.globalAlpha = sharp*.45; ctx.drawImage(bladeC, X, Y); }
+    if (glint.a > 0.01){
+      const cx = -150 + glint.p*1350, w = 70, sk = 90;
+      ctx.save(); ctx.globalAlpha = glint.a;
+      ctx.setTransform(k,0,0,k,X,Y); ctx.beginPath();
+      ctx.moveTo(cx-w+sk,0); ctx.lineTo(cx+w+sk,0); ctx.lineTo(cx+w-sk,LH); ctx.lineTo(cx-w-sk,LH); ctx.closePath(); ctx.clip();
+      ctx.setTransform(1,0,0,1,0,0); ctx.drawImage(bladeC, X, Y); ctx.drawImage(bladeC, X, Y);
+      ctx.restore();
+    }
+    // hạt: dùng toạ độ nửa ảnh như cũ
+    ctx.globalAlpha = 1;
+    ctx.setTransform(2*k,0,0,2*k,OX*dpr,OY*dpr);
+    ctx.globalCompositeOperation = 'lighter';
+    const tnow = performance.now()*.001;
+    while (flames.length < FLAME_N) flames.push(newFlame());
+    for (let i=flames.length-1;i>=0;i--){
+      const f = flames[i];
+      f.x += f.vx + Math.sin(tnow*6 + f.ph + f.y*.04)*.7; f.y += f.vy; f.vy *= .995; f.life -= f.decay;
+      if (f.life <= 0){ flames.splice(i,1); continue; }
+      const L = f.life, r = f.r*(0.35+0.65*L)/2;
+      ctx.globalAlpha = Math.min(1, L*.85);
+      ctx.drawImage(SPR[L > .72 ? 0 : L > .42 ? 1 : 2], f.x/2 - r*.75, f.y/2 - r*1.9, r*1.5, r*3.8);
+    }
+    ctx.globalAlpha = 1;
+    for (const e of embers){
+      e.x += e.vx + Math.sin(e.y*.05)*.3; e.y += e.vy; e.life -= .003;
+      if (e.y < -10 || e.life <= 0) Object.assign(e, newEmber(false));
+      const al = e.a * Math.min(1, e.life*3) * (0.6+0.4*Math.sin(performance.now()*.006 + e.x));
+      ctx.fillStyle = `rgba(255,${120+Math.random()*60|0},40,${al})`;
+      ctx.fillRect(e.x/2, e.y/2, e.s, e.s);
+    }
+    for (let i=parts.length-1;i>=0;i--){
+      const p = parts[i];
+      const ox = p.x, oy = p.y;
+      p.x += p.vx; p.y += p.vy; p.vx *= .95; p.vy *= .95; p.life -= p.decay;
+      if (p.life <= 0){ parts.splice(i,1); continue; }
+      if (p.spark){
+        ctx.strokeStyle = `rgba(255,${190+p.life*60|0},${110+p.life*120|0},${p.life})`;
+        ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo((ox-p.vx*1.5)/2,(oy-p.vy*1.5)/2); ctx.lineTo(p.x/2,p.y/2); ctx.stroke();
+        ctx.fillStyle = `rgba(255,250,230,${p.life})`; ctx.fillRect(p.x/2-1, p.y/2-1, 2, 2);
+      } else {
+        ctx.fillStyle = `rgba(225,232,240,${p.life*.85})`; ctx.fillRect(p.x/2, p.y/2, 1.5, 1.5);
+      }
+    }
+    ctx.globalCompositeOperation = 'source-over'; ctx.setTransform(1,0,0,1,0,0);
+    // âm thanh xoẹt theo tốc độ kéo
+    speed *= .86;
+    if (noiseGain && !muted){
+      noiseGain.gain.setTargetAtTime(Math.min(.32, speed*5.5), ac.currentTime, .03);
+      bp.frequency.setTargetAtTime(1500 + sharp*2600 + speed*3000, ac.currentTime, .05);
+    }
+    requestAnimationFrame(frame);
+  }
+  new IntersectionObserver(es => { visible = es[0].isIntersecting; toggleRun(); }).observe(stage);
+  document.addEventListener('visibilitychange', toggleRun);
+  function toggleRun(){ const want = visible && !document.hidden; if (want && !running){ running = true; requestAnimationFrame(frame); } else if (!want) { running = false; if (noiseGain) noiseGain.gain.value = 0; } }
+
+  // ---------- độ sắc ----------
+  const NEED = 10;           // 10 nửa lượt = 5 lượt đi về
+  let sharp = 0, done = false, speed = 0;
+  const STATES = [[0,'Dull'],[.25,'Getting there'],[.5,'Keen'],[.8,'Almost razor'],[1,'Razor sharp']];
+  function setSharp(v){
+    sharp = Math.min(1, v);
+    $('fill').style.width = (sharp*100).toFixed(1)+'%';
+    grab.setAttribute('aria-valuenow', Math.round(sharp*100));
+    let s = STATES[0][1]; for (const [k,n] of STATES) if (sharp >= k) s = n;
+    $('state').textContent = s;
+    if (sharp >= 1 && !done) reward();
+  }
+  function sweep(dur=.9, peak=.9){
+    gsap.killTweensOf(glint); glint.a = peak; glint.p = 0;
+    gsap.to(glint, {p:1, duration:dur, ease:'power2.inOut', onComplete(){ gsap.to(glint,{a:0,duration:.3}); }});
+  }
+  function tink(){
+    if (!ac || muted) return;
+    const now = ac.currentTime;
+    [[1318,.12],[1975,.06]].forEach(([f,g])=>{ const o=ac.createOscillator(), gn=ac.createGain(); o.type='triangle'; o.frequency.value=f;
+      gn.gain.setValueAtTime(g, now); gn.gain.exponentialRampToValueAtTime(.0001, now+.7); o.connect(gn).connect(ac.destination); o.start(now); o.stop(now+.75); });
+  }
+  function reward(){
+    done = true;
+    ting(); emit(140, Math.random()<.5?1:-1, 1.6);
+    $('meter').classList.add('done');
+    gsap.timeline()
+      .to('#flash', {autoAlpha:1, duration:.12})
+      .to('#flash', {autoAlpha:0, duration:1.1, ease:'power2.out'})
+      .add(() => sweep(1.1, 1), 0)
+      .add(() => sweep(1.1, .8), .9)
+      .to('#reward', {autoAlpha:1, duration:.5, ease:'power2.out'}, .25)
+      .from('#reward', {y:24, duration:.6, ease:'back.out(1.6)'}, .25);
+  }
+  $('again').addEventListener('click', () => {
+    done = false; $('meter').classList.remove('done');
+    gsap.to('#reward', {autoAlpha:0, duration:.3});
+    gsap.to({v:sharp}, {v:0, duration:.6, onUpdate(){ setSharp(this.targets()[0].v); }});
+  });
+
+  // ---------- gợi ý + nhích dao khi chưa ai chạm ----------
+  const hint = $('hint');
+  function placeHint(){
+    const x = OX + 1180*scale, y = OY + 200*scale;
+    hint.style.left = Math.min(stage.clientWidth - hint.offsetWidth - 50, x) + 'px'; hint.style.top = Math.max(50, y) + 'px';
+  }
+  const nudge = gsap.timeline({repeat:-1, repeatDelay:1.4})
+    .to({v:.5}, {v:.72, duration:.5, ease:'sine.inOut', onUpdate(){ setT(this.targets()[0].v); }})
+    .to({v:.72}, {v:.32, duration:.7, ease:'sine.inOut', onUpdate(){ setT(this.targets()[0].v); }})
+    .to({v:.32}, {v:.5, duration:.5, ease:'sine.inOut', onUpdate(){ setT(this.targets()[0].v); }});
+  const hintBob = gsap.to(hint, {y:-8, duration:.7, yoyo:true, repeat:-1, ease:'sine.inOut'});
+  let touched = false;
+  function firstTouch(){
+    if (touched) return; touched = true;
+    nudge.kill(); hintBob.kill(); gsap.to(hint, {autoAlpha:0, y:-14, duration:.35});
+  }
+
+  // ---------- kéo ----------
+  const L = Math.hypot(ax, ay);
+  let dragging = false, lx = 0, ly = 0, lastDir = 0, pending = 0;
+  grab.addEventListener('pointerdown', e => {
+    dragging = true; lx = e.clientX; ly = e.clientY; grab.setPointerCapture(e.pointerId);
+    firstTouch(); if (!muted) initAudio();
+  });
+  grab.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY;
+    pending += (dy + dx*.5) / (L*scale*.9);
+  });
+  const end = () => { dragging = false; };
+  grab.addEventListener('pointerup', end); grab.addEventListener('pointercancel', end);
+  grab.addEventListener('keydown', e => {
+    const k = {ArrowDown:.25, ArrowRight:.25, ArrowUp:-.25, ArrowLeft:-.25}[e.key];
+    if (k === undefined) return; e.preventDefault(); firstTouch(); if (!muted) initAudio();
+    gsap.to({v:t}, {v:Math.max(0,Math.min(1,t+k)), duration:.18, ease:'sine.out', onUpdate(){ move(this.targets()[0].v - t); }});
+  });
+  function move(dt){
+    const before = t; setT(t + dt); const real = t - before;
+    if (!real) return;
+    const dir = Math.sign(real);
+    speed = Math.min(.12, speed + Math.abs(real)*.5);
+    emit(Math.min(MOBILE ? 14 : 26, Math.ceil(Math.abs(real)*(MOBILE ? 110 : 170))), dir);
+    if (!done) setSharp(sharp + Math.abs(real)/NEED);
+    // cuối mỗi lượt: ánh sáng chạy dọc lưỡi
+    if ((t >= 1 || t <= 0) && dir !== lastDir) { sweep(.6, .25 + sharp*.6); }
+    lastDir = dir;
+  }
+
+  // ---------- lửa lò chập chờn ----------
+  (function flicker(){ gsap.to(fire, {a:.6+Math.random()*.4, duration:.15+Math.random()*.3, ease:'sine.inOut', onComplete:flicker}); })();
+
+  setT(t); layout(); setSharp(0);
+  Promise.all([load(IMG.nen), load(IMG.tay), load(IMG.blade)]).then(([nen, tay, blade]) => { I = {nen, tay, blade}; layout(); });
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => placeHint());
+  requestAnimationFrame(frame);
+})();
 </script>
 </body>
 </html>
