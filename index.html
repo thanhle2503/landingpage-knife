@@ -124,6 +124,15 @@ footer a.pp{text-decoration:underline;color:var(--ink);font-weight:600}
 .meter{transition:opacity .4s}.meter.done{opacity:0}
 @media (max-width:760px){ .arms{width:100%;margin-top:4px} .arm-spark{width:34px;height:34px;margin:-17px 0 0 -17px} }
 
+/* ===== thanh kiếm + hai cánh tay nằm dưới ảnh ===== */
+.kh-under{display:grid;place-items:center;padding:22px 16px 26px;background:#070504;border-bottom:1px solid rgba(200,151,63,.18)}
+.kh-under .meter,.kh-under .reward{grid-area:1/1;position:relative;left:auto;right:auto;bottom:auto;transform:none}
+.kh-under .meter{width:min(560px,100%)}
+.kh-under .meter.done{opacity:0;visibility:hidden}
+.kh-under .reward{max-width:none;width:min(600px,100%);display:flex;justify-content:center}
+.kh-under .arms{width:100%;margin:0}
+@media (max-width:760px){ .kh-under{padding:16px 12px 20px} }
+
 </style>
 <style id="kh-css">
 section.kh-hero{padding:0}
@@ -202,7 +211,7 @@ section.kh-hero{padding:0}
 @media (max-width:760px){
   .kh-hero{display:flex;flex-direction:column;background:radial-gradient(120% 80% at 20% 0%,#2a1408,#0b0907 60%)}
   .kh-copy{position:relative;left:auto;top:auto;max-width:none;padding:34px 22px 18px}
-  .kh-hero h1{font-size:44px}
+  .kh-hero h1{font-size:clamp(26px,9vw,44px)}
   .kh-sub{max-width:none;font-size:15px}
   .eb-x{display:none}
   .kh-stage{height:auto;aspect-ratio:1/1.08;min-height:0;--c:70px;--cs:92px}
@@ -221,7 +230,7 @@ section.kh-hero{padding:0}
 @media (prefers-reduced-motion:reduce){ .firelight{opacity:.5} }
 
 .kh-skip{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font:600 14px/1 Figtree;color:var(--k-ember2);pointer-events:auto;text-decoration:underline;text-underline-offset:3px}
-.kh-hero h1{font-weight:700}
+.kh-hero h1{font-weight:700;white-space:nowrap}
 .kh-facts{display:flex;gap:10px;flex-wrap:wrap;padding-block:18px 4px}
 @media (max-width:760px){ .kh-skip{margin-top:10px;font-size:13px} }
 
@@ -236,7 +245,6 @@ section.kh-hero{padding:0}
     <a href="#parts">Belts and parts</a>
     <a href="#grit">Grit guide</a>
   </nav>
-  <a class="btn sm" data-main href="#">Shop Work Sharp</a>
 </div></header>
 
 <main>
@@ -244,7 +252,7 @@ section.kh-hero{padding:0}
 <section class="kh-hero" id="hero">
   <div class="kh-copy">
     <div class="eyebrow"><span class="eb-long"><svg viewBox="-10 -10 20 20"><path d="M0-10L2.2-2.2 10 0 2.2 2.2 0 10-2.2 2.2-10 0-2.2-2.2Z" fill="#ff7a1f"/></svg>Knife.Picks<span class="eb-x"> · The whetstone trial</span></span></div>
-    <h1>Sharpen like<br>a <em>knight.</em></h1>
+    <h1>Sharpen like a <em>knight.</em></h1>
   </div>
 
   <div class="kh-stage" id="stage">
@@ -259,6 +267,13 @@ section.kh-hero{padding:0}
       Drag the knife
     </div>
 
+    <button class="sound" id="sound" type="button" aria-label="Sound on or off">
+      <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9a4 4 0 010 6M18.5 6.5a7.5 7.5 0 010 11"/></svg>
+      <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6"/></svg>
+    </button>
+  </div>
+
+  <div class="kh-under">
     <div class="meter" id="meter">
       <div class="kh-row"><span>Edge</span><span class="state" id="state">Dull</span></div>
       <div class="sword">
@@ -274,18 +289,12 @@ section.kh-hero{padding:0}
     </div>
 
     <div class="reward" id="reward">
-      <div class="big">Razor sharp.</div>
       <div class="arms" id="arms">
         <a class="arm arm-l" href="#sharpeners" aria-label="See the sharpeners"><img src="assets/img/hero/arm-left.webp" alt="" width="906" height="490"></a>
         <span class="arm-spark" aria-hidden="true"></span>
         <button class="arm arm-r" id="again" type="button" aria-label="Sharpen again"><img src="assets/img/hero/arm-right.webp" alt="" width="882" height="490"></button>
       </div>
     </div>
-
-    <button class="sound" id="sound" type="button" aria-label="Sound on or off">
-      <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9a4 4 0 010 6M18.5 6.5a7.5 7.5 0 010 11"/></svg>
-      <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6"/></svg>
-    </button>
   </div>
 </section>
 
