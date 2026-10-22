@@ -107,6 +107,23 @@ footer a.pp{text-decoration:underline;color:var(--ink);font-weight:600}
 @media(max-width:860px){.head{grid-template-columns:1fr}nav.top{display:none}}
 @media(max-width:760px){.wrap{padding-inline:16px}.hero{padding-block:22px 8px}.hero p{font-size:16.5px}section{padding-block:40px}.logo img{height:28px}.rows{grid-template-columns:1fr}.grit{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+/* ===== hai cánh tay giáp (thay hai nút) ===== */
+.reward{max-width:none}
+.arms{position:relative;display:flex;align-items:center;width:min(560px,38vw);margin-top:6px;pointer-events:auto;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.arm{display:block;flex:1 1 0;min-width:0;padding:0;margin:0;border:0;background:none;cursor:pointer;line-height:0;transition:filter .25s;filter:drop-shadow(0 6px 14px rgba(0,0,0,.85))}
+.arm img{display:block;width:100%;height:auto}
+.arm-l{flex-basis:906px}.arm-r{flex-basis:882px}
+.arm:hover,.arm:focus-visible{filter:brightness(1.3) drop-shadow(0 0 10px rgba(255,170,70,.5))}
+.arm:focus-visible{outline:none}
+.arm-spark{position:absolute;z-index:2;left:50.6%;top:51.5%;width:44px;height:44px;margin:-22px 0 0 -22px;pointer-events:none;
+  background:radial-gradient(circle,#fff6d8 0 6%,#ffb547 14%,rgba(255,122,31,.55) 30%,transparent 62%)}
+.arm-spark::before,.arm-spark::after{content:"";position:absolute;left:50%;top:50%;background:linear-gradient(90deg,transparent,#ffe1a3,transparent);width:46px;height:2px;margin:-1px 0 0 -23px}
+.arm-spark::after{transform:rotate(90deg)}
+
+.meter{transition:opacity .4s}.meter.done{opacity:0}
+@media (max-width:760px){ .arms{width:100%;margin-top:4px} .arm-spark{width:34px;height:34px;margin:-17px 0 0 -17px} }
+
 </style>
 <style id="kh-css">
 section.kh-hero{padding:0}
@@ -258,10 +275,10 @@ section.kh-hero{padding:0}
 
     <div class="reward" id="reward">
       <div class="big">Razor sharp.</div>
-      <div class="btns">
-        <a class="kh-btn" href="#sharpeners">See the sharpeners
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M7 1v11M2 7l5 5 5-5"/></svg></a>
-        <button class="kh-btn kh-ghost" id="again" type="button">Sharpen again</button>
+      <div class="arms" id="arms">
+        <a class="arm arm-l" href="#sharpeners" aria-label="See the sharpeners"><img src="assets/img/hero/arm-left.webp" alt="" width="906" height="490"></a>
+        <span class="arm-spark" aria-hidden="true"></span>
+        <button class="arm arm-r" id="again" type="button" aria-label="Sharpen again"><img src="assets/img/hero/arm-right.webp" alt="" width="882" height="490"></button>
       </div>
     </div>
 
@@ -621,8 +638,12 @@ const META = {"A": [140, -95], "B": [250, -40], "off": [293, -245.99999999999997
       .add(() => sweep(1.1, 1), 0)
       .add(() => sweep(1.1, .8), .9)
       .to('#reward', {autoAlpha:1, duration:.5, ease:'power2.out'}, .25)
-      .from('#reward', {y:24, duration:.6, ease:'back.out(1.6)'}, .25);
+      .from('#reward', {y:24, duration:.6, ease:'back.out(1.6)'}, .25)
+      .from('.arm-l', {x:-40, duration:.9, ease:'power3.out'}, .3)
+      .from('.arm-r', {x:40, duration:.9, ease:'power3.out'}, .3)
+      .from('.arm-spark', {scale:0, autoAlpha:0, duration:.5, ease:'back.out(3)'}, 1.05);
   }
+  gsap.to('.arm-spark', {scale:1.25, opacity:.75, duration:.9, repeat:-1, yoyo:true, ease:'sine.inOut'});
   $('again').addEventListener('click', () => {
     done = false; $('meter').classList.remove('done');
     gsap.to('#reward', {autoAlpha:0, duration:.3});
