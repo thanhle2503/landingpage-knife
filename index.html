@@ -133,6 +133,8 @@ footer a.pp{text-decoration:underline;color:var(--ink);font-weight:600}
 .kh-under .arms{width:100%;margin:0}
 @media (max-width:760px){ .kh-under{padding:16px 12px 20px} }
 
+/* nút nhạc nằm trên thanh đầu trang */
+header .sound,header .sound[class]{position:static;right:auto;top:auto;flex:none;width:40px;height:40px}
 </style>
 <style id="kh-css">
 section.kh-hero{padding:0}
@@ -245,6 +247,10 @@ section.kh-hero{padding:0}
     <a href="#parts">Belts and parts</a>
     <a href="#grit">Grit guide</a>
   </nav>
+  <button class="sound" id="sound" type="button" aria-label="Sound on or off">
+      <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9a4 4 0 010 6M18.5 6.5a7.5 7.5 0 010 11"/></svg>
+      <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6"/></svg>
+    </button>
 </div></header>
 
 <main>
@@ -267,10 +273,6 @@ section.kh-hero{padding:0}
       Drag the knife
     </div>
 
-    <button class="sound" id="sound" type="button" aria-label="Sound on or off">
-      <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9a4 4 0 010 6M18.5 6.5a7.5 7.5 0 010 11"/></svg>
-      <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6"/></svg>
-    </button>
   </div>
 
   <div class="kh-under">
