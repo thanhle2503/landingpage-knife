@@ -91,6 +91,24 @@ section[id]{scroll-margin-top:76px}
 .row .r span{font-weight:700}
 
 /* grit guide */
+.types{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.type{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:6px;transition:border-color .25s,transform .25s}
+.type:hover{border-color:var(--ember);transform:translateY(-3px)}
+.type b{font-family:Grenze,Georgia,serif;font-size:30px;line-height:1}
+.type small{color:var(--mut);font-size:15px;flex:1}
+.type span{color:var(--ember-l);font-weight:600;font-size:14px}
+.brands{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.brand{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s}
+.brand:hover{border-color:var(--ember)}
+.brand .bpic{aspect-ratio:16/9;background:#fff;position:relative;display:flex;align-items:center;justify-content:center;font-family:Grenze,Georgia,serif;font-size:34px;color:var(--ember-l)}
+.brand .bpic.ph{background:radial-gradient(400px 200px at 80% 0%,rgba(255,106,43,.22),transparent 70%),#15171b}
+.brand .bpic img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:14px}
+.brand .bbody{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.brand .bbody small{color:var(--mut);font-size:13px;text-transform:uppercase;letter-spacing:.6px}
+.brand h3{font-size:26px}
+.brand p{color:var(--mut);font-size:15px;flex:1}
+.brand .meta{display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--mut);font-size:14px}
+@media(max-width:900px){.types,.brands{grid-template-columns:1fr}}
 .grit{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:16px;overflow:hidden}
 .grit div{padding:16px;border-right:1px solid var(--line)}
 .grit div:last-child{border-right:0}
@@ -243,9 +261,9 @@ section.kh-hero{padding:0}
 <header><div class="wrap">
   <a class="logo" href="./" aria-label="Knife.Picks home"><img src="assets/img/logo.svg" alt="Knife.Picks" width="220" height="34"></a>
   <nav class="top">
-    <a href="#sharpeners">Sharpeners</a>
-    <a href="#parts">Belts and parts</a>
-    <a href="#grit">Grit guide</a>
+    <a href="sharpeners/">Sharpeners</a>
+    <a href="kitchen-knives/">Kitchen knives</a>
+    <a href="cookware/">Cookware</a>
   </nav>
   <button class="sound" id="sound" type="button" aria-label="Sound on or off">
       <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9a4 4 0 010 6M18.5 6.5a7.5 7.5 0 010 11"/></svg>
@@ -292,7 +310,7 @@ section.kh-hero{padding:0}
 
     <div class="reward" id="reward">
       <div class="arms" id="arms">
-        <a class="arm arm-l" href="#sharpeners" aria-label="See the sharpeners"><img src="assets/img/hero/arm-left.webp" alt="" width="906" height="490"></a>
+        <a class="arm arm-l" href="sharpeners/" aria-label="See the sharpeners"><img src="assets/img/hero/arm-left.webp" alt="" width="906" height="490"></a>
         <span class="arm-spark" aria-hidden="true"></span>
         <button class="arm arm-r" id="again" type="button" aria-label="Sharpen again"><img src="assets/img/hero/arm-right.webp" alt="" width="882" height="490"></button>
       </div>
@@ -301,20 +319,25 @@ section.kh-hero{padding:0}
 </section>
 
 <div class="wrap kh-facts facts">
-  <span><b>3-year</b> warranty on sharpeners</span>
-  <span><b>30-day</b> money-back (not on belts, plates or strops)</span>
-  <span><b>Free delivery</b> over $99</span>
+  <span><b>Sharpeners, knives and pans</b> compared brand by brand</span>
+  <span><b>US and Australia</b> stores</span>
+  <span><b>Belts and parts</b> matched to your machine</span>
 </div>
 
-<section id="sharpeners"><div class="wrap">
+<section id="types"><div class="wrap">
   <div class="head">
-    <h2>Choose a sharpener</h2>
-    <p>Grouped by how you'll use it. Specs come from the Work Sharp Australia product pages; prices are in AUD.</p>
+    <h2>Shop by need</h2>
+    <p>One tab per kind of product. Each one compares brand against brand, then any two products.</p>
   </div>
-  <div class="chips" id="grpChips"></div>
-  <div class="grid" id="machines"></div>
+  <div class="types" id="typeGrid"></div>
 </div></section>
-
+<section id="brands"><div class="wrap">
+  <div class="head">
+    <h2>Shop by brand</h2>
+    <p>Pick a brand to open its tab, already filtered to that brand.</p>
+  </div>
+  <div class="brands" id="brandGrid"></div>
+</div></section>
 <section class="parts-sec" id="parts"><div class="wrap">
   <div class="head">
     <h2>Belts and parts by machine</h2>
@@ -342,7 +365,7 @@ section.kh-hero{padding:0}
 
 <footer><div class="wrap">
   <p><b>Affiliate disclosure:</b> This site contains affiliate links. If you buy through them we may earn a commission, at no extra cost to you.</p>
-  <p>Knife.Picks is an independent site and is not the official Work Sharp website. Brand names, images and product names belong to their owners. Prices, stock, warranty and delivery are set by Work Sharp Tools Australia and may change.</p>
+  <p>Knife.Picks is an independent site and is not the official website of any brand listed. Brand names, images and product names belong to their owners. Prices, stock, warranty and delivery are set by each store and may change.</p>
   <p id="ppRow" hidden><a class="pp" id="ppLink" href="#" target="_blank" rel="noopener">Privacy Policy</a></p>
   <p>© <span id="y"></span> Knife.Picks</p>
 </div></footer>
@@ -358,6 +381,19 @@ const SHOPS = {
   worksharp: { name:"Work Sharp", site:"https://worksharptools.com.au/products/", track:"?bg_ref=Zu7T5LJ1qw" }
 };
 const MAIN_LINK = "https://worksharptools.com.au/?bg_ref=Zu7T5LJ1qw";
+// TABS: one page per product type (the menu at the top)
+const TABS = [
+  { page:"sharpeners/", label:"Sharpeners", text:"Guided, electric and pocket sharpeners from Work Sharp, US and Australia." },
+  { page:"kitchen-knives/", label:"Kitchen knives", text:"Chef's knives and knife sets, brand against brand." },
+  { page:"cookware/", label:"Cookware", text:"Pans to go with the knives you sharpen." }
+];
+// BRAND CARDS under "Shop by brand". page = the tab, ?brand= opens it filtered. img:"" shows the name until a photo is added.
+const BRAND_CARDS = [
+  { page:"sharpeners/?brand=worksharpau", label:"Work Sharp Australia", kind:"Official AU store, AUD", text:"20 sharpeners plus every belt, plate and spare, with local warranty and delivery.", count:"20 sharpeners", img:"https://worksharptools.com.au/cdn/shop/files/c418b9a8276d4a3cb9d5bed54c222aa9.jpg?width=600" },
+  { page:"sharpeners/?brand=worksharp", label:"Work Sharp", kind:"Sold on Amazon US", text:"Guided, electric and pocket sharpeners for buyers in the US.", count:"10 products", img:"" },
+  { page:"kitchen-knives/?brand=huusk", label:"Huusk", kind:"Sold on Amazon", text:"Japanese-style chef's and utility knives.", count:"10 products", img:"" },
+  { page:"kitchen-knives/?brand=madein", label:"Made In", kind:"Sold on Amazon", text:"Restaurant-grade knives and pans.", count:"10 products", img:"" }
+];
 const GROUPS = [
   { id:"all", title:"All" },
   { id:"bench", title:"Benchtop, guided" },
@@ -406,12 +442,12 @@ function machineCard(m){
     '<a class="btn sm" target="_blank" rel="sponsored noopener" href="'+link(m.h)+'">View</a></div></div></div></article>';
 }
 function renderMachines(){
-  document.getElementById("grpChips").innerHTML = GROUPS.map(function(g){
-    var n = g.id==="all" ? M.length : M.filter(function(m){return m.grp===g.id}).length;
-    return '<button type="button" data-grp="'+g.id+'" class="'+(g.id===grp?'on':'')+'">'+g.title+'<small>'+n+'</small></button>';
+  document.getElementById("typeGrid").innerHTML = TABS.map(function(t){
+    return '<a class="type" href="'+t.page+'" data-reveal><b>'+t.label+'</b><small>'+t.text+'</small><span>Compare →</span></a>'; }).join("");
+  document.getElementById("brandGrid").innerHTML = BRAND_CARDS.map(function(b){
+    return '<a class="brand" href="'+b.page+'" data-reveal>'+(b.img?'<div class="bpic"><img loading="lazy" alt="'+esc(b.label)+'" src="'+esc(b.img)+'"></div>':'<div class="bpic ph">'+esc(b.label)+'</div>')+
+      '<div class="bbody"><small>'+esc(b.kind)+'</small><h3>'+esc(b.label)+'</h3><p>'+esc(b.text)+'</p><div class="meta"><span>'+esc(b.count)+'</span><span class="btn sm">See '+esc(b.label)+'</span></div></div></a>';
   }).join("");
-  var list = grp==="all" ? M.slice().sort(function(a,b){return a.p-b.p}) : M.filter(function(m){return m.grp===grp}).sort(function(a,b){return a.p-b.p});
-  document.getElementById("machines").innerHTML = list.map(machineCard).join("");
 }
 function renderParts(){
   document.getElementById("famChips").innerHTML = FAMILIES.map(function(f){
@@ -433,7 +469,6 @@ function renderParts(){
   }).join("");
 }
 document.addEventListener("click",function(e){
-  var g=e.target.closest("[data-grp]"); if(g){ grp=g.dataset.grp; renderMachines(); return; }
   var c=e.target.closest("[data-famchip]"); if(c){ fam=c.dataset.famchip; renderParts(); return; }
   var f=e.target.closest("[data-fam]"); if(f){ fam=f.dataset.fam; renderParts(); document.getElementById("parts").scrollIntoView({behavior:"smooth"}); }
 });
