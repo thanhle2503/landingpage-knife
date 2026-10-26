@@ -91,7 +91,7 @@ section[id]{scroll-margin-top:76px}
 .row .r span{font-weight:700}
 
 /* grit guide */
-.types{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.types{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .type{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;flex-direction:column;gap:6px;transition:border-color .25s,transform .25s}
 .type:hover{border-color:var(--ember);transform:translateY(-3px)}
 .type b{font-family:Grenze,Georgia,serif;font-size:30px;line-height:1}
@@ -263,7 +263,6 @@ section.kh-hero{padding:0}
   <nav class="top">
     <a href="sharpeners/">Sharpeners</a>
     <a href="kitchen-knives/">Kitchen knives</a>
-    <a href="cookware/">Cookware</a>
   </nav>
   <button class="sound" id="sound" type="button" aria-label="Sound on or off">
       <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 9a4 4 0 010 6M18.5 6.5a7.5 7.5 0 010 11"/></svg>
@@ -319,7 +318,7 @@ section.kh-hero{padding:0}
 </section>
 
 <div class="wrap kh-facts facts">
-  <span><b>Sharpeners, knives and pans</b> compared brand by brand</span>
+  <span><b>Sharpeners and knives</b> compared brand by brand</span>
   <span><b>US and Australia</b> stores</span>
   <span><b>Belts and parts</b> matched to your machine</span>
 </div>
@@ -384,15 +383,14 @@ const MAIN_LINK = "https://worksharptools.com.au/?bg_ref=Zu7T5LJ1qw";
 // TABS: one page per product type (the menu at the top)
 const TABS = [
   { page:"sharpeners/", label:"Sharpeners", text:"Guided, electric and pocket sharpeners from Work Sharp, US and Australia." },
-  { page:"kitchen-knives/", label:"Kitchen knives", text:"Chef's knives and knife sets, brand against brand." },
-  { page:"cookware/", label:"Cookware", text:"Pans to go with the knives you sharpen." }
+  { page:"kitchen-knives/", label:"Kitchen knives", text:"Chef's, boning and paring knives, sets, boards and honing steels." }
 ];
 // BRAND CARDS under "Shop by brand". page = the tab, ?brand= opens it filtered. img:"" shows the name until a photo is added.
 const BRAND_CARDS = [
   { page:"sharpeners/?brand=worksharpau", label:"Work Sharp Australia", kind:"Official AU store, AUD", text:"20 sharpeners plus every belt, plate and spare, with local warranty and delivery.", count:"20 sharpeners", img:"https://worksharptools.com.au/cdn/shop/files/c418b9a8276d4a3cb9d5bed54c222aa9.jpg?width=600" },
-  { page:"sharpeners/?brand=worksharp", label:"Work Sharp", kind:"Sold on Amazon US", text:"Guided, electric and pocket sharpeners for buyers in the US.", count:"10 products", img:"" },
-  { page:"kitchen-knives/?brand=huusk", label:"Huusk", kind:"Sold on Amazon", text:"Japanese-style chef's and utility knives.", count:"10 products", img:"" },
-  { page:"kitchen-knives/?brand=madein", label:"Made In", kind:"Sold on Amazon", text:"Restaurant-grade knives and pans.", count:"10 products", img:"" }
+  { page:"sharpeners/?brand=worksharp", label:"Work Sharp", kind:"Sold on Amazon US", text:"Guided, electric and pocket sharpeners for buyers in the US.", count:"10 products", img:"https://m.media-amazon.com/images/I/81j1dWO2rKL._AC_SL1500_.jpg" },
+  { page:"kitchen-knives/?brand=huusk", label:"Huusk", kind:"Sold on Amazon", text:"Hand-forged boning knives, cleavers, Serbian chef knives and sets.", count:"10 products", img:"https://m.media-amazon.com/images/I/81P0LlDhf8L._AC_SL1500_.jpg" },
+  { page:"kitchen-knives/?brand=madein", label:"Made In", kind:"Sold on Amazon", text:"French-made chef's, bread and paring knives, boards and blocks.", count:"9 products", img:"https://m.media-amazon.com/images/I/61RA50gYEoL._AC_SL1500_.jpg" }
 ];
 const GROUPS = [
   { id:"all", title:"All" },
